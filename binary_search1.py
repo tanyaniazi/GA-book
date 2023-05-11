@@ -49,6 +49,8 @@ def inputs():
 def binary_search():
     low, high, your_number = inputs()
     guess = random.randint(low, high)
+    pre_guess = []
+    pre_guess.append(guess)
     while True:
         response = input(f'aha! I guess I got it! is your number {guess}? say yes or no, do not lie buddy! ;)')
         while response.lower() not in ['yes', 'no']:
@@ -83,20 +85,22 @@ def binary_search():
                 print('darn! let me try harder')
                 previous_guess = guess
                 high = previous_guess
-                guess = random.randint(low,high)
-                # while True:
-                #   guess = random.randint(low,high)
-                #   if previous_guess != guess:
-                #     break
+                while True:
+                    guess = random.randint(low,high)
+                    if guess not in pre_guess:
+                        pre_guess.append(guess)
+                        break
+
                 
             elif response.lower() == 'higher':
                 print('darn! let me try harder')
                 previous_guess = guess
                 low = previous_guess + 1
-                guess = random.randint(low,high)
-                # while True:
-                #   guess = random.randint(low,high)
-                #   if previous_guess != guess:
-                #     break
+                while True:
+                    guess = random.randint(low,high)
+                    if guess not in pre_guess:
+                        pre_guess.append(guess)
+                        break
+   
           
 binary_search()
