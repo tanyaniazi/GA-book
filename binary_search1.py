@@ -6,6 +6,11 @@ import random
 def inputs():
     while True:
         low_input = int(input('please insert the minimum integer number: '))
+
+        #now the user is asked if the range provided is inclusive or exclusive for max and min seperately
+        min_inex = input('is your minimum number inclusive or exclusive? ')  
+        while min_inex.lower() not in ['inclusive', 'exclusive']:
+            min_inex = input("Invalid input. Please enter 'inclusive' or 'exclusive': ")
         try:
             value_low = int(low_input)
             break
@@ -14,6 +19,9 @@ def inputs():
 
     while True:    
         high_input = int(input('please insert the maximum integer number: '))
+        max_inex = input('is your maximum number inclusive or exclusive? ')
+        while max_inex.lower() not in ['inclusive', 'exclusive']:
+            max_inex = input("Invalid input. Please enter 'inclusive' or 'exclusive': ")
         try:
             value_high = int(high_input)
             while value_high <= value_low + 1:
@@ -38,8 +46,17 @@ def inputs():
             print("Invalid maximum input. Please enter an integer.")
 
     #since the input is received as str it needs to be converted to integer
-    low = int(low_input)
-    high = int(high_input)
+    #since in a range min is inclusive and max is exclusive, we shed light on what exactly user wants
+    if min_inex == 'inclusive':
+        low = int(low_input)
+    elif min_inex == 'exclusive':
+        low = int(low_input) + 1
+    
+    if max_inex == 'inclusive':
+        high = int(high_input) + 1
+    elif max_inex == 'exclusive':
+        high = int(high_input)
+
     your_number = int(your_number_input)
 
     return low, high, your_number
